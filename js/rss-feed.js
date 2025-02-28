@@ -38,7 +38,7 @@ async function fetchAndProcessRSS(rssFilePath, numItemsToDisplay, numOfCharacter
       const link = item.querySelector('link').textContent;
       const description = item.querySelector('description').textContent;
 
-      // Image (handling variations):
+      // get item image
       let imageElement = null;
       const mediaContentElements = item.getElementsByTagNameNS('http://search.yahoo.com/mrss/', 'content');
       for (const mediaContent of mediaContentElements) {
@@ -56,6 +56,7 @@ async function fetchAndProcessRSS(rssFilePath, numItemsToDisplay, numOfCharacter
       let content = null;
       const contentEncodedElements = item.getElementsByTagNameNS('http://purl.org/rss/1.0/modules/content/', 'encoded');
 
+      // reduce the amount of content
       if (contentEncodedElements.length > 0) {
         const contentEncoded = contentEncodedElements[0].textContent;
         content = getCertainNumberOfCharacters(contentEncoded, numOfCharacters);
